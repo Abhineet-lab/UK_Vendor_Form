@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vendor Onboarding Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 20px; }
+    label { font-weight: bold; display: block; margin-top: 15px; }
+    input, select, textarea { width: 100%; padding: 6px; margin-top: 5px; }
+    .checkbox-group, .multiple-choice { margin-top: 5px; }
+    .checkbox-group label, .multiple-choice label {
+      font-weight: normal; display: inline-flex; align-items: center; margin-right: 20px; white-space: nowrap;
+    }
+    .checkbox-group label input, .multiple-choice label input {
+      margin-right: 5px;
+      order: -1;
+    }
+    .attachments input { margin-top: 10px; }
+    button { margin-top: 20px; padding: 10px 15px; font-size: 16px; }
+
+    /* Tooltip styles */
+  .tooltip {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+.tooltip .tooltip-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 14px;
+  height: 14px;
+  background-color: #d3d3d3;
+  color: black;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  transition: background-color 0.3s;
+}
+
+.tooltip .tooltip-icon:hover {
+  background-color: #b0b0b0;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 180px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  padding: 6px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 130%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+  </style>
+</head>
+<body>
+
+<header style="display: flex; align-items: center; margin-bottom: 20px; background-color: black; padding: 10px 20px; color: white;">
+  <img src="https://www.dentsu.com/assets/images/main-logo-alt.png" alt="Dentsu Logo" style="height: 25px; margin-right: 15px;" />
+  <h2 style="margin: 0; color: white; font-size: 45px;">NEW VENDOR FORM</h2>
+</header>
+
+<form action="http://10.19.244.10:5000/submit" method="POST" enctype="multipart/form-data">
+
+  <!-- dentsu buyer contact email -->
+<div>
+  <label for="dentsu_buyer_email">Dentsu Buyer Contact Email<span style="color: red;">*</span></label>
+  <input type="email" id="dentsu_buyer_email" name="dentsu_buyer_email" required />
+</div>
+
+  <fieldset style="border: 2px solid #ccc; padding: 15px 30px 15px 15px; margin-bottom: 20px;">
+  <legend style="font-weight: bold; font-size: 18px;">Supplier details</legend>
+  
+    <!-- supplier type -->
+<div>
+  <label for="supplier_type">Supplier Type<span style="color: red;">*</span></label>
+  <select id="supplier_type" name="supplier_type" required>
+    <option value="">--Select--</option>
+    <option value="Media Supplier">Media Supplier</option>
+    <option value="Intercompany Supplier">Intercompany Supplier</option>
+  </select>
+</div>
+
+    <!-- registered company name -->
+<div>
+  <label for="company_name">Registered Company Name<span style="color: red;">*</span></label>
+  <input type="text" id="company_name" name="company_name" required />
+</div>
+
+
+    <!-- address lines -->
+<div>
+  <label for="address_line_1">Address Line 1 (Building Name/Number & Street Name)<span style="color: red;">*</span></label>
+  <input type="text" id="address_line_1" name="address_line_1" required />
+</div>
+<div>
+  <label for="address_line_2">Address Line 2 (Street name & Town/City)</label>
+  <input type="text" id="address_line_2" name="address_line_2" />
+</div>
+<div>
+  <label for="address_line_3">Address Line 3 (Postcode or Town/City)<span style="color: red;">*</span></label>
+  <input type="text" id="address_line_3" name="address_line_3" />
+</div>
+<div>
+  <label for="address_line_4">Address Line 4 (Country / State)<span style="color: red;">*</span></label>
+  <input type="text" id="address_line_4" name="address_line_4" required />
+</div>
+
+    <!-- supplier contact -->
+<div>
+  <label for="contact_name">Supplier Contact Name<span style="color: red;">*</span></label>
+  <input type="text" id="contact_name" name="contact_name" required />
+</div>
+<div>
+  <label for="contact_phone">Supplier Contact Telephone Number<span style="color: red;">*</span></label>
+  <input type="tel" id="contact_phone" name="contact_phone" required />
+</div>
+<div>
+  <label for="contact_email">Supplier Contact Email Address<span style="color: red;">*</span></label>
+  <input type="email" id="contact_email" name="contact_email" required />
+</div>
+
+<!-- registration & bank details -->
+<div>
+  <label for="company_reg_number">Supplier Company Registration Number</label>
+  <input type="text" id="company_reg_number" name="company_reg_number" />
+</div>
+<div>
+  <label for="account_holder">Bank Account Name</label>
+  <input type="text" id="account_holder" name="account_holder" />
+</div>
+<div>
+  <label for="bank_name">Bank Name</label>
+  <input type="text" id="bank_name" name="bank_name" />
+</div>
+<div>
+  <label for="bank_sort_code">Bank Sort Code</label>
+  <input type="text" id="bank_sort_code" name="bank_sort_code" />
+</div>
+<div>
+  <label for="account_number">Bank account number</label>
+  <input type="text" id="account_number" name="account_number" />
+</div>
+<div>
+  <label for="swift_code">SWIFT/BIC Code</label>
+  <input type="text" id="swift_code" name="swift_code" />
+</div>
+<div>
+  <label for="iban_code">IBAN Number</label>
+  <input type="text" id="iban_code" name="iban_code" />
+</div>
+<div>
+  <label for="currency">Currency<span style="color: red;">*</span></label>
+  <select id="currency" name="currency" required>
+    <option value="">--Select--</option>
+    <option value="EUR">EUR</option>
+    <option value="USD">USD</option>
+    <!-- add more as needed -->
+  </select>
+</div>
+
+<!-- payment terms -->
+<div>
+  <label for="payment_terms">Payment Terms<span style="color: red;">*</span></label>
+  <input type="text" id="payment_terms" name="payment_terms" required />
+</div>
+<div>
+  <label for="utr">UTR - unique tax ref</label>
+  <input type="text" id="utr" name="utr" />
+</div>
+<div style="margin-top: 15px; font-size: 14px; color: #333;">
+  <strong>Note:</strong> Only for UK, but, if not a registered company, must fill UTR.
+</div>
+</fieldset>
+
+
+    <fieldset style="border: 2px solid #ccc; padding: 15px 30px 15px 15px; margin-bottom: 20px;">
+  <legend style="font-weight: bold; font-size: 18px;">Legal</legend>
+      
+  <div class="media-supplier-note" style="margin-top: 20px; margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; background-color: #f9f9f9;">
+  <p><strong>Digital and Press/Print Media Suppliers Only</strong> (if you are not a digital or print/press media supplier, please go to the section below)</p>
+
+  <p>We, the Supplier, acknowledge that dentsu does not accept supplier standard terms and conditions for digital or print/press media buys.</p>
+
+  <p>
+    Notwithstanding any Supplier terms and conditions that may be set out in an invoice or booking form (or similar) issued to dentsu on or after the date this New Supplier Set Up Form is submitted,
+    we accept dentsu’s terms and conditions for digital media buys 
+    (<em>Dentsu UK Terms and Conditions for Internet Advertising for One Year or Less</em>) and print/press media buys 
+    (<em>Dentsu UK Terms and Conditions for Print Media Buys</em>) (whichever relevant).
+  </p>
+
+  <p>You can find a copy of both sets of terms and conditions here: 
+    <a href="https://www.dentsu.com/legal" target="_blank">Dentsu Legal Center</a>
+  </p>
+</div>
+
+      <!-- media supplier confirmation -->
+<div>
+  <label for="media_confirmation">Digital/Print/Press Media Supplier Confirmation:</label>
+  <input type="checkbox" id="media_confirmation" name="media_confirmation" />
+</div>
+
+
+      <div style="margin-top: 20px; margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; background-color: #f9f9f9;">
+  <p><strong>All Other Media Suppliers</strong></p>
+
+  <p>
+    In the text box below, please provide details of any contractual discussions that have been had to date between you, the Supplier, and dentsu regarding the applicability of terms and conditions.
+    Please also confirm any key commercial terms that have been agreed.
+  </p>
+</div>
+
+      <!-- agreement upload -->
+<div>
+  <label for="terms_attachment">Agreement / Terms and Conditions Attachments:</label>
+  <input type="file" id="terms_attachment" name="terms_attachment" />
+</div>
+      
+</fieldset>
+
+  <button type="submit">Submit</button>
+</form>
+
+<!-- JavaScript to handle conditional visibility -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const supplierType = document.getElementById('supplier_legal_personality');
+    
+    function toggleBasedOnVatGroup() {
+  const supplierTypeValue = supplierType.value; // 'Natural Person' or 'Legal Person'
+  const grp = vatGroup.value;
+
+  // Hide and reset all fields
+  pecSection.style.display = 'none';
+  pecInput.required = false;
+
+  supplierVatNumberSection.style.display = 'none';
+  supplierVatNumberInput.required = false;
+  supplierVatNumberStar.style.display = 'none';
+
+  supplierFiscalCodeSection.style.display = 'none';
+  supplierFiscalCodeInput.required = false;
+  supplierFiscalCodeStar.style.display = 'none';
+
+  if (grp === 'FOR_ITA') {
+    // Show PEC for both types, never required
+    pecSection.style.display = 'block';
+    pecInput.required = false;
+
+    if (supplierTypeValue === 'Natural Person') {
+      supplierVatNumberSection.style.display = 'block';
+      supplierVatNumberInput.required = false;
+      supplierVatNumberStar.style.display = 'none';
+
+      supplierFiscalCodeSection.style.display = 'block';
+      supplierFiscalCodeInput.required = true;
+      supplierFiscalCodeStar.style.display = 'inline';
+
+    } else if (supplierTypeValue === 'Legal Person') {
+      supplierVatNumberSection.style.display = 'block';
+      supplierVatNumberInput.required = true;
+      supplierVatNumberStar.style.display = 'inline';
+
+      supplierFiscalCodeSection.style.display = 'block';
+      supplierFiscalCodeInput.required = true;
+      supplierFiscalCodeStar.style.display = 'inline';
+    }
+
+  } else if (grp === 'FOR_UE') {
+    // PEC is hidden for both types
+    if (supplierTypeValue === 'Natural Person') {
+      supplierVatNumberSection.style.display = 'block';
+      supplierVatNumberInput.required = false;
+      supplierVatNumberStar.style.display = 'none';
+
+      supplierFiscalCodeSection.style.display = 'block';
+      supplierFiscalCodeInput.required = false;
+      supplierFiscalCodeStar.style.display = 'none';
+
+    } else if (supplierTypeValue === 'Legal Person') {
+      supplierVatNumberSection.style.display = 'block';
+      supplierVatNumberInput.required = true;
+      supplierVatNumberStar.style.display = 'inline';
+
+      supplierFiscalCodeSection.style.display = 'block';
+      supplierFiscalCodeInput.required = false;
+      supplierFiscalCodeStar.style.display = 'none';
+    }
+
+  } else if (grp === 'FOR_XUE') {
+    // For both types, nothing shown
+    // All fields stay hidden and not required
+  }
+}
+
+    
+    supplierVatNumberInput.addEventListener('input', validateVATNumber);
+    accountNumberInput.addEventListener("input", validateAccountNumber);
+
+
+
+    // Initial load
+    toggleSupplierFields();
+    toggleBasedOnProfessional();
+   
+  });
+</script>
+</body>
+</html>
