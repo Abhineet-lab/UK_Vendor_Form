@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vendor Onboarding Form</title>
+  <title>NEW SUPPLIER SETUP FORM</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 20px; }
     label { font-weight: bold; display: block; margin-top: 15px; }
@@ -75,7 +75,7 @@
 
 <header style="display: flex; align-items: center; margin-bottom: 20px; background-color: black; padding: 10px 20px; color: white;">
   <img src="https://www.dentsu.com/assets/images/main-logo-alt.png" alt="Dentsu Logo" style="height: 25px; margin-right: 15px;" />
-  <h2 style="margin: 0; color: white; font-size: 45px;">NEW VENDOR FORM</h2>
+  <h2 style="margin: 0; color: white; font-size: 45px;">NEW SUPPLIER SETUP FORM</h2>
 </header>
 
 <form action="http://10.19.244.10:5000/submit" method="POST" enctype="multipart/form-data">
@@ -173,14 +173,28 @@
     <option value="">--Select--</option>
     <option value="EUR">EUR</option>
     <option value="USD">USD</option>
-    <!-- add more as needed -->
+    <option value="GBP">GBP</option>
+    <option value="Other">Other</option>
   </select>
+</div>
+
+    <div>
+  <label for="currency_others">If selected other, please state which currency<span style="color: red;">*</span></label>
+  <input type="text" id="currency_others" name="currency_others" />
 </div>
 
 <!-- payment terms -->
 <div>
   <label for="payment_terms">Payment Terms<span style="color: red;">*</span></label>
-  <input type="text" id="payment_terms" name="payment_terms" required />
+  <select id="payment_terms" name="payment_terms" required>
+    <option value="">--Select--</option>
+    <option value="0">0</option>
+    <option value="7">7</option>
+    <option value="14">14</option>
+    <option value="30">30</option>
+    <option value="45">45</option>
+    <option value="60">60</option>
+  </select>
 </div>
 <div>
   <label for="utr">UTR - unique tax ref</label>
@@ -214,8 +228,13 @@
 
       <!-- media supplier confirmation -->
 <div>
-  <label for="media_confirmation">Digital/Print/Press Media Supplier Confirmation:</label>
-  <input type="checkbox" id="media_confirmation" name="media_confirmation" />
+  <label for="media_confirmation">Please select which option to be checked?<span style="color: red;">*</span></label>
+  <select id="media_confirmation" name="media_confirmation" required>
+    <option value="">--Select--</option>
+    <option value="We are a press/print or digital media supplier and agree to be bound by dentsu's standard terms and conditions.">We are a press/print or digital media supplier and agree to be bound by dentsu's standard terms and conditions.</option>
+    <option value="We are not a press/print or digital media supplier and are a supplier of other types of media. We confirm we will upload a copy of our standard terms on the next page for dentsu's legal team to review.">We are not a press/print or digital media supplier and are a supplier of other types of media. We confirm we will upload a copy of our standard terms on the next page for dentsu's legal team to review.</option>
+    <option value="A separate contract has already been negotiated and signed with dentsu. We confirm we will upload a copy of the signed agreement for verification on the next page.">A separate contract has already been negotiated and signed with dentsu. We confirm we will upload a copy of the signed agreement for verification on the next page.</option>
+  </select>
 </div>
 
 
@@ -228,10 +247,46 @@
   </p>
 </div>
 
+      <div>
+  <label for="contractual_agreement">Contractual Agreement and Commercial Terms Details<span style="color: red;">*</span></label>
+  <input type="text" id="contractual_agreement" name="contractual_agreement" required />
+</div>
       <!-- agreement upload -->
 <div>
-  <label for="terms_attachment">Agreement / Terms and Conditions Attachments:</label>
+  <label for="terms_attachment">Agreement / Terms and Conditions Attachments</label>
   <input type="file" id="terms_attachment" name="terms_attachment" />
+</div>
+
+      <div id="we_the_supplier_section" style="display: none;">
+      <label>Has Contract been Agreed?<span style="color: red;">*</span></label>
+  <div class="checkbox-group">
+    <label><input type="checkbox" name="we_the_supplier" value="we_the_supplier" /> We, the Supplier, Confirm that we have uploaded above, either(1) a copy of the existing fully Signed agreement between us, the Supplier, and dentsu; or (2) a copy of our Standard terms and conditions for dentsu’s Legal team to review</label>
+  </div>
+      </div>
+      <!-- media info -->
+<div>
+  <label for="media_supplier_name">Media Supplier Name:</label>
+  <input type="text" id="media_supplier_name" name="media_supplier_name" />
+</div>
+<div>
+  <label for="media_type">Media Type:</label>
+  <input type="text" id="media_type" name="media_type" />
+</div>
+<div>
+  <label for="comments">Comments:</label>
+  <textarea id="comments" name="comments"></textarea>
+</div>
+<div>
+  <label for="media_discount">Media Discount:</label>
+  <input type="text" id="media_discount" name="media_discount" />
+</div>
+<div>
+  <label for="press_frequency">Press Only - Frequency:</label>
+  <input type="text" id="press_frequency" name="press_frequency" />
+</div>
+<div>
+  <label for="press_interest">Press Only - Interest:</label>
+  <input type="text" id="press_interest" name="press_interest" />
 </div>
       
 </fieldset>
