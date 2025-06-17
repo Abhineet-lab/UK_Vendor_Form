@@ -185,8 +185,17 @@
 
 <!-- payment terms -->
 <div>
-  <label for="payment_terms">Payment Terms<span style="color: red;">*</span></label>
-  <select id="payment_terms" name="payment_terms">
+  <label for="payment_terms">
+    Payment Terms <span style="color: red;">*</span>
+    <!-- Tooltip -->
+    <span class="tooltip">
+      <span class="tooltip-icon">i</span>
+      <span class="tooltiptext">
+        Standard payment terms are N45 or higher; anything under will require approval from AP Finance.
+      </span>
+    </span>
+  </label>
+  <select id="payment_terms" name="payment_terms" required>
     <option value="">--Select--</option>
     <option value="0">0</option>
     <option value="7">7</option>
@@ -196,6 +205,7 @@
     <option value="60">60</option>
   </select>
 </div>
+
 <div>
   <label for="utr">UTR - unique tax ref</label>
   <input type="text" id="utr" name="utr" />
@@ -265,32 +275,171 @@
       </div>
       <!-- media info -->
 <div>
-  <label for="media_supplier_name">Media Supplier Name:</label>
-  <input type="text" id="media_supplier_name" name="media_supplier_name" />
+  <label for="media_supplier_name">
+    Media Supplier Name: <span style="color: red;">*</span>
+    <!-- Tooltip -->
+    <span class="tooltip">
+      <span class="tooltip-icon">i</span>
+      <span class="tooltiptext">
+        Publication name, Radio station or Advertising site name
+      </span>
+    </span>
+  </label>
+  <input type="text" id="media_supplier_name" name="media_supplier_name" required />
 </div>
-<div>
-  <label for="media_type">Media Type:</label>
-  <input type="text" id="media_type" name="media_type" />
+
+
+     <div id="media_type_section" style="display: none;">
+  <label>
+    Media Type: <span style="color: red;">*</span>
+    <!-- Tooltip -->
+    <span class="tooltip">
+      <span class="tooltip-icon">i</span>
+      <span class="tooltiptext">For vendor</span>
+    </span>
+  </label>
+  
+  <div class="checkbox-group">
+    <label><input type="checkbox" name="media_type" value="Cinema" /> Cinema</label>
+    <label><input type="checkbox" name="media_type" value="Digital" /> Digital</label>
+    <label><input type="checkbox" name="media_type" value="Direct Mail" /> Direct Mail</label>
+    <label><input type="checkbox" name="media_type" value="Fees" /> Fees</label>
+    <label><input type="checkbox" name="media_type" value="Fees Media F" /> Fees Media F</label>
+    <label><input type="checkbox" name="media_type" value="Fees Media G" /> Fees Media G</label>
+    <label><input type="checkbox" name="media_type" value="Fees Media H" /> Fees Media H</label>
+    <label><input type="checkbox" name="media_type" value="Other TV" /> Other TV</label>
+    <label><input type="checkbox" name="media_type" value="Outdoor" /> Outdoor</label>
+    <label><input type="checkbox" name="media_type" value="Radio" /> Radio</label>
+    <label><input type="checkbox" name="media_type" value="Television" /> Television</label>
+    <label><input type="checkbox" name="media_type" value="Mobile" /> Mobile</label>
+  </div>
 </div>
+
+
 <div>
   <label for="comments">Comments:</label>
   <textarea id="comments" name="comments"></textarea>
 </div>
-<div>
-  <label for="media_discount">Media Discount:</label>
-  <input type="text" id="media_discount" name="media_discount" />
+
+     <div>
+  <label for="media_discount">
+    Media Discount <span style="color: red;">*</span>
+    <!-- Tooltip -->
+    <span class="tooltip">
+      <span class="tooltip-icon">i</span>
+      <span class="tooltiptext">As per contractual agreement</span>
+    </span>
+  </label>
+  <select id="media_discount" name="media_discount" required>
+    <option value="">--Select--</option>
+    <option value="0">0</option>
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="15">15</option>
+  </select>
 </div>
-<div>
-  <label for="press_frequency">Press Only - Frequency:</label>
-  <input type="text" id="press_frequency" name="press_frequency" />
-</div>
-<div>
-  <label for="press_interest">Press Only - Interest:</label>
-  <input type="text" id="press_interest" name="press_interest" />
-</div>
+
+      
+
+      <div id="press_frequency_section" style="display: none;">
+    <label>Press Only - Frequency:<span id="press_frequency_required_star" style="color: red; display: none;">*</span></label>
+  <select name="press_frequency" id = "press_frequency" required>
+    <option value="">--Select--</option>
+    <option value="Daily">Daily</option>
+    <option value="Weekly">Weekly</option>
+    <option value="Fortnightly">Fortnightly</option>
+    <option value="Monthly">Monthly</option>
+    <option value="Quarterly">Quarterly</option>
+    <option value="Annual">Annual</option>
+    <option value="Biannual">Biannual</option>
+    <option value="Alternate Months">Alternate Months</option>
+    <option value="Irregular">Irregular</option>
+  </select>
+    </div>
+
+      <div id="press_interest_section" style="display: none;">
+    <label>Press Only - Interest:<span id="press_interest_required_star" style="color: red; display: none;">*</span></label>
+  <select name="press_interest" id = "press_interest" required>
+    <option value="">--Select--</option>
+    <option value="National Press">National Press</option>
+    <option value="Provincial Press">Provincial Press</option>
+    <option value="General Magazines">General Magazines</option>
+    <option value="Woman's Magazines">Woman's Magazines</option>
+    <option value="Special Consumer">Special Consumer</option>
+    <option value="Juvenile">Juvenile</option>
+    <option value="Foreign / International">Foreign / International</option>
+    <option value="Directory / YRB / Programme">Directory / YRB / Programme</option>
+    <option value="Trade and Technical">Trade and Technical</option>
+    <option value="Miscellaneous">Miscellaneous</option>
+    <option value="Men's Magazines">Men's Magazines</option>
+  </select>
+    </div>
+      
       <div>
   <label for="vat_number">VAT number<span style="color: red;">*</span></label>
   <input type="text" id="vat_number" name="vat_number"/>
+</div>
+
+      <div>
+  <label for="vat_rate">VAT rate<span style="color: red;">*</span></label>
+  <select id="vat_rate" name="vat_rate">
+    <option value="">--Select--</option>
+    <option value="0">0%</option>
+    <option value="20">20%</option>
+  </select>
+</div>
+
+     <div>
+  <label for="registered_vat_name">
+    Registered VAT name
+    <!-- Tooltip -->
+    <span class="tooltip">
+      <span class="tooltip-icon">i</span>
+      <span class="tooltiptext">
+        For UK registered Suppliers the VAT number will be GB followed by:<br>
+        • one block of 3 digits, one block of 4 digits, and one block of 2 digits<br>
+        • OR GB followed by a block of 3 digits<br>
+        • OR one block of 5 characters
+      </span>
+    </span>
+  </label>
+  <input type="text" id="registered_vat_name" name="registered_vat_name" />
+</div>
+
+      <div>
+  <label for="registered_vat_office_address">Registered VAT Office Address</label>
+  <input type="text" id="registered_vat_office_address" name="registered_vat_office_address" />
+</div>
+
+      <p>
+  UK-based supplier VAT registration number needs to be validated at:
+  <a href="https://www.tax.service.gov.uk/check-vat-number/enter-vat-details" target="_blank">
+    https://www.tax.service.gov.uk/check-vat-number/enter-vat-details
+  </a>
+  <br>
+  For other EU-based suppliers, VAT registration number needs to be validated at:
+  <a href="https://ec.europa.eu/taxation_customs/vies/" target="_blank">
+    https://ec.europa.eu/taxation_customs/vies/
+  </a>
+</p>
+
+      <div>
+  <label for="supplier_remittance_email">Supplier Remittance Email<span style="color: red;">*</span></label>
+  <input type="email" id="supplier_remittance_email" name="supplier_remittance_email"/>
+</div>
+
+    <div>
+  <label for="attachments">
+    Attachments <span style="color: red;">*</span>
+    <!-- Tooltip -->
+    <span class="tooltip">
+      <span class="tooltip-icon">i</span>
+      <span class="tooltiptext">
+        (Evidence of the Company information plus bank details must be attached in non-editable PDF form, must be less than 6 months old)
+      </span>
+    </span>
+  </label>
+  <input type="file" id="attachments" name="attachments" required accept="application/pdf" />
 </div>
 
       
