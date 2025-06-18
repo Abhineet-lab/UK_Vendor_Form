@@ -269,7 +269,7 @@
 
       <div id="we_the_supplier_section" style="display: none;">
       <label>Has Contract been Agreed?<span style="color: red;">*</span></label>
-  <div class="checkbox-group">
+  <div id="we_the_supplier" class="checkbox-group">
     <label><input type="checkbox" name="we_the_supplier" value="we_the_supplier" /> We, the Supplier, Confirm that we have uploaded above, either(1) a copy of the existing fully Signed agreement between us, the Supplier, and dentsu; or (2) a copy of our Standard terms and conditions for dentsu’s Legal team to review</label>
   </div>
       </div>
@@ -516,15 +516,15 @@
     toogleBasedOnMediaConfirmation();
 
     document.querySelector('form').addEventListener('submit', function (e) {
-  const selectedCompanies = document.querySelectorAll('input[name="company"]:checked');
-  if (selectedCompanies.length === 0) {
-    alert("Please select at least one Company.");
+  const selectedMedia = document.querySelectorAll('input[name="media_type"]:checked');
+  if (selectedMedia.length === 0) {
+    alert("Please select at least one media type.");
     e.preventDefault();
     return false;
   }
-  const selectedMediaVehicles = document.querySelectorAll('input[name="media_vehicle"]:checked');
-  if (selectedMediaVehicles.length === 0 && mediagroupSelector.value === 'MEDIA') {
-    alert("Please select at least one Media Vehicle.");
+  const selectedMediaConfirmation = document.querySelectorAll('input[name="we_the_supplier"]:checked');
+  if ((selectedMediaConfirmation.length === 0 && document.getElementById('media_confirmation').value === 'We are not a press/print') || (selectedMediaVehicles.length === 0 && document.getElementById('media_confirmation').value === 'A separate contract')) {
+    alert("Please select the supplier confirmation.");
     e.preventDefault();
     return false;
   }
