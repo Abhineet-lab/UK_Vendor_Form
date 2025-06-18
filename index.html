@@ -178,7 +178,7 @@
   </select>
 </div>
 
-    <div>
+    <div id="currency_others_section" style="display: none;">
   <label for="currency_others">If selected other, please state which currency<span style="color: red;">*</span></label>
   <input type="text" id="currency_others" name="currency_others" />
 </div>
@@ -241,9 +241,9 @@
   <label for="media_confirmation">Please select which option to be checked?<span style="color: red;">*</span></label>
   <select id="media_confirmation" name="media_confirmation">
     <option value="">--Select--</option>
-    <option value="We are a press/print or digital media supplier and agree to be bound by dentsu's standard terms and conditions.">We are a press/print or digital media supplier and agree to be bound by dentsu's standard terms and conditions.</option>
-    <option value="We are not a press/print or digital media supplier and are a supplier of other types of media. We confirm we will upload a copy of our standard terms on the next page for dentsu's legal team to review.">We are not a press/print or digital media supplier and are a supplier of other types of media. We confirm we will upload a copy of our standard terms on the next page for dentsu's legal team to review.</option>
-    <option value="A separate contract has already been negotiated and signed with dentsu. We confirm we will upload a copy of the signed agreement for verification on the next page.">A separate contract has already been negotiated and signed with dentsu. We confirm we will upload a copy of the signed agreement for verification on the next page.</option>
+    <option value="We are a press/print">We are a press/print or digital media supplier and agree to be bound by dentsu's standard terms and conditions.</option>
+    <option value="We are not a press/print">We are not a press/print or digital media supplier and are a supplier of other types of media. We confirm we will upload a copy of our standard terms on the next page for dentsu's legal team to review.</option>
+    <option value="A separate contract">A separate contract has already been negotiated and signed with dentsu. We confirm we will upload a copy of the signed agreement for verification on the next page.</option>
   </select>
 </div>
 
@@ -257,12 +257,12 @@
   </p>
 </div>
 
-      <div>
+      <div id="contractual_agreement_section" style="display: none;">
   <label for="contractual_agreement">Contractual Agreement and Commercial Terms Details<span style="color: red;">*</span></label>
   <input type="text" id="contractual_agreement" name="contractual_agreement"/>
 </div>
       <!-- agreement upload -->
-<div>
+<div id="terms_attachment_section" style="display: none;">
   <label for="terms_attachment">Agreement / Terms and Conditions Attachments</label>
   <input type="file" id="terms_attachment" name="terms_attachment" />
 </div>
@@ -289,7 +289,7 @@
 </div>
 
 
-     <div id="media_type_section" style="display: none;">
+     <div id="media_type_section" style="display: block;">
   <label>
     Media Type: <span style="color: red;">*</span>
     <!-- Tooltip -->
@@ -299,7 +299,7 @@
     </span>
   </label>
   
-  <div class="checkbox-group">
+  <div id = "media_type" class="checkbox-group">
     <label><input type="checkbox" name="media_type" value="Cinema" /> Cinema</label>
     <label><input type="checkbox" name="media_type" value="Digital" /> Digital</label>
     <label><input type="checkbox" name="media_type" value="Direct Mail" /> Direct Mail</label>
@@ -309,6 +309,7 @@
     <label><input type="checkbox" name="media_type" value="Fees Media H" /> Fees Media H</label>
     <label><input type="checkbox" name="media_type" value="Other TV" /> Other TV</label>
     <label><input type="checkbox" name="media_type" value="Outdoor" /> Outdoor</label>
+    <label><input type="checkbox" name="media_type" value="Press" />Press</label>
     <label><input type="checkbox" name="media_type" value="Radio" /> Radio</label>
     <label><input type="checkbox" name="media_type" value="Television" /> Television</label>
     <label><input type="checkbox" name="media_type" value="Mobile" /> Mobile</label>
@@ -341,9 +342,9 @@
 
       
 
-      <div id="press_frequency_section" style="display: none;">
+      <div id="press_frequency_section" style="display: block;">
     <label>Press Only - Frequency:<span id="press_frequency_required_star" style="color: red; display: none;">*</span></label>
-  <select name="press_frequency" id = "press_frequency" required>
+  <select name="press_frequency" id = "press_frequency">
     <option value="">--Select--</option>
     <option value="Daily">Daily</option>
     <option value="Weekly">Weekly</option>
@@ -357,9 +358,9 @@
   </select>
     </div>
 
-      <div id="press_interest_section" style="display: none;">
+      <div id="press_interest_section" style="display: block;">
     <label>Press Only - Interest:<span id="press_interest_required_star" style="color: red; display: none;">*</span></label>
-  <select name="press_interest" id = "press_interest" required>
+  <select name="press_interest" id = "press_interest">
     <option value="">--Select--</option>
     <option value="National Press">National Press</option>
     <option value="Provincial Press">Provincial Press</option>
@@ -451,85 +452,82 @@
 <!-- JavaScript to handle conditional visibility -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const supplierType = document.getElementById('supplier_legal_personality');
-    
-    function toggleBasedOnVatGroup() {
-  const supplierTypeValue = supplierType.value; // 'Natural Person' or 'Legal Person'
-  const grp = vatGroup.value;
+    document.getElementById('dentsu_buyer_email').required = true;
+    document.getElementById('supplier_type').required = true;
+    document.getElementById('company_name').required = true;
+    document.getElementById('address_line_1').required = true;
+    document.getElementById('address_line_3').required = true;
+    document.getElementById('address_line_4').required = true;
+    document.getElementById('contact_name').required = true;
+    document.getElementById('contact_phone').required = true;
+    document.getElementById('contact_email').required = true;
+    document.getElementById('company_reg_number').required = true;
+    document.getElementById('account_holder').required = true;
+    document.getElementById('bank_name').required = true;
+    document.getElementById('bank_sort_code').required = true;
+    document.getElementById('account_number').required = true;
+    document.getElementById('currency').required = true;
+    document.getElementById('payment_terms').required = true;
+    document.getElementById('media_supplier_name').required = true;
+    document.getElementById('media_discount').required = true;
+    document.getElementById('supplier_remittance_email').required = true;
+    document.getElementById('attachments').required = true;
 
-  // Hide and reset all fields
-  pecSection.style.display = 'none';
-  pecInput.required = false;
-
-  supplierVatNumberSection.style.display = 'none';
-  supplierVatNumberInput.required = false;
-  supplierVatNumberStar.style.display = 'none';
-
-  supplierFiscalCodeSection.style.display = 'none';
-  supplierFiscalCodeInput.required = false;
-  supplierFiscalCodeStar.style.display = 'none';
-
-  if (grp === 'FOR_ITA') {
-    // Show PEC for both types, never required
-    pecSection.style.display = 'block';
-    pecInput.required = false;
-
-    if (supplierTypeValue === 'Natural Person') {
-      supplierVatNumberSection.style.display = 'block';
-      supplierVatNumberInput.required = false;
-      supplierVatNumberStar.style.display = 'none';
-
-      supplierFiscalCodeSection.style.display = 'block';
-      supplierFiscalCodeInput.required = true;
-      supplierFiscalCodeStar.style.display = 'inline';
-
-    } else if (supplierTypeValue === 'Legal Person') {
-      supplierVatNumberSection.style.display = 'block';
-      supplierVatNumberInput.required = true;
-      supplierVatNumberStar.style.display = 'inline';
-
-      supplierFiscalCodeSection.style.display = 'block';
-      supplierFiscalCodeInput.required = true;
-      supplierFiscalCodeStar.style.display = 'inline';
+    function toogleBasedOnCurrencySelection(){
+      if(document.getElementById('currency').value === 'Other') {
+        document.getElementById('currency_others_section').style.display = 'block';
+        document.getElementById('currency_others').required = true;
+      } else {
+        document.getElementById('currency_others_section').style.display = 'none';
+        document.getElementById('currency_others').required = false;
+      }
+    }
+    function toogleBasedOnMediaConfirmation(){
+      if(document.getElementById('media_confirmation').value === 'We are not a press/print'  || document.getElementById('media_confirmation').value === 'A separate contract') {
+        document.getElementById('we_the_supplier_section').style.display = 'block';
+        document.getElementById('contractual_agreement_section').style.display = 'block';
+        document.getElementById('contractual_agreement').required = true;
+      } else{
+        document.getElementById('we_the_supplier_section').style.display = 'none';
+        document.getElementById('contractual_agreement_section').style.display = 'none';
+        document.getElementById('contractual_agreement').required = false;
+      }
+    }
+    function toogleBasedOnPressSelection(){
+      if(document.getElementById('media_type').value === 'Press') {
+        document.getElementById('press_interest').required = true;
+        document.getElementById('press_frequency').required = true;
+        document.getElementById('press_interest_required_star').style.display = 'inline';
+        document.getElementById('press_frequency_required_star').style.display = 'inline';
+      } else {
+        document.getElementById('press_interest').required = false;
+        document.getElementById('press_frequency').required = false;
+        document.getElementById('press_interest_required_star').style.display = 'none';
+        document.getElementById('press_frequency_required_star').style.display = 'none';
+      }
     }
 
-  } else if (grp === 'FOR_UE') {
-    // PEC is hidden for both types
-    if (supplierTypeValue === 'Natural Person') {
-      supplierVatNumberSection.style.display = 'block';
-      supplierVatNumberInput.required = false;
-      supplierVatNumberStar.style.display = 'none';
+    document.getElementById('media_type').addEventListener('change', toogleBasedOnPressSelection);
+    document.getElementById('currency').addEventListener('change', toogleBasedOnCurrencySelection);
+    document.getElementById('media_confirmation').addEventListener('change', toogleBasedOnMediaConfirmation);
 
-      supplierFiscalCodeSection.style.display = 'block';
-      supplierFiscalCodeInput.required = false;
-      supplierFiscalCodeStar.style.display = 'none';
+    toogleBasedOnCurrencySelection();
+    toogleBasedOnPressSelection();
+    toogleBasedOnMediaConfirmation();
 
-    } else if (supplierTypeValue === 'Legal Person') {
-      supplierVatNumberSection.style.display = 'block';
-      supplierVatNumberInput.required = true;
-      supplierVatNumberStar.style.display = 'inline';
-
-      supplierFiscalCodeSection.style.display = 'block';
-      supplierFiscalCodeInput.required = false;
-      supplierFiscalCodeStar.style.display = 'none';
-    }
-
-  } else if (grp === 'FOR_XUE') {
-    // For both types, nothing shown
-    // All fields stay hidden and not required
+    document.querySelector('form').addEventListener('submit', function (e) {
+  const selectedCompanies = document.querySelectorAll('input[name="company"]:checked');
+  if (selectedCompanies.length === 0) {
+    alert("Please select at least one Company.");
+    e.preventDefault();
+    return false;
   }
-}
-
-    
-    supplierVatNumberInput.addEventListener('input', validateVATNumber);
-    accountNumberInput.addEventListener("input", validateAccountNumber);
-
-
-
-    // Initial load
-    toggleSupplierFields();
-    toggleBasedOnProfessional();
-   
+  const selectedMediaVehicles = document.querySelectorAll('input[name="media_vehicle"]:checked');
+  if (selectedMediaVehicles.length === 0 && mediagroupSelector.value === 'MEDIA') {
+    alert("Please select at least one Media Vehicle.");
+    e.preventDefault();
+    return false;
+  }
   });
 </script>
 </body>
